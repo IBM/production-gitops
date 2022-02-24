@@ -29,30 +29,30 @@
 drwxr-xr-x   3 anthonyodowd  staff    96  7 Feb 17:32 .
 drwxr-xr-x  17 anthonyodowd  staff   544  7 Feb 15:53 ..
 </code></pre></div> <p>Notice that file mode for <code>create-repos.sh</code> has <code>x</code> set to indicate that it is executable.</p> <p><br></p> </li> <li> <p><em>Run the <code>create-repos.sh</code> script</em></p> <p>Let's run the <code>create-repos.sh</code> script. It will:</p> <ul> <li>create the repositories in your GitHub organization</li> <li>clone those repositories to your local machine for customization</li> </ul> <p>Issue the following command to run the script:</p> <div class=highlight><pre><span></span><code><span class=nv>OUTPUT_DIR</span><span class=o>=</span>. ./create-repos.sh
-</code></pre></div> <p>You'll see four repositories created in your <code>$GIT_ORG</code> organization and cloned to your local machine:</p> <div class="no-copy highlight"><pre><span></span><code>Client Version: <span class=m>4</span>.8.0-202111041632.p0.git.88e7eba.assembly.stream-88e7eba
-Creating GitHub repositories and <span class=nb>local</span> clones <span class=k>in</span> folder: tutorial-org-123-root
+</code></pre></div> <p>You'll see four repositories created in your <code>$GIT_ORG</code> organization and cloned to your local machine:</p> <div class="no-copy highlight"><pre><span></span><code>Client Version: 4.8.0-202111041632.p0.git.88e7eba.assembly.stream-88e7eba
+Creating GitHub repositories and local clones in folder: tutorial-org-123-root
 Github user/org is tutorial-org-123
 Repository multi-tenancy-gitops found but not cloned... cloning repository
-Cloning into <span class=s1>&#39;multi-tenancy-gitops&#39;</span>...
-remote: Enumerating objects: <span class=m>403</span>, <span class=k>done</span>.
-remote: Counting objects: <span class=m>100</span>% <span class=o>(</span><span class=m>403</span>/403<span class=o>)</span>, <span class=k>done</span>.
-remote: Compressing objects: <span class=m>100</span>% <span class=o>(</span><span class=m>194</span>/194<span class=o>)</span>, <span class=k>done</span>.
-remote: Total <span class=m>403</span> <span class=o>(</span>delta <span class=m>259</span><span class=o>)</span>, reused <span class=m>328</span> <span class=o>(</span>delta <span class=m>198</span><span class=o>)</span>, pack-reused <span class=m>0</span>
-Receiving objects: <span class=m>100</span>% <span class=o>(</span><span class=m>403</span>/403<span class=o>)</span>, <span class=m>3</span>.29 MiB <span class=p>|</span> <span class=m>4</span>.98 MiB/s, <span class=k>done</span>.
-Resolving deltas: <span class=m>100</span>% <span class=o>(</span><span class=m>259</span>/259<span class=o>)</span>, <span class=k>done</span>.
-Already on <span class=s1>&#39;master&#39;</span>
-Your branch is up to date with <span class=s1>&#39;origin/master&#39;</span>.
+Cloning into &#39;multi-tenancy-gitops&#39;...
+remote: Enumerating objects: 403, done.
+remote: Counting objects: 100% (403/403), done.
+remote: Compressing objects: 100% (194/194), done.
+remote: Total 403 (delta 259), reused 328 (delta 198), pack-reused 0
+Receiving objects: 100% (403/403), 3.29 MiB | 4.98 MiB/s, done.
+Resolving deltas: 100% (259/259), done.
+Already on &#39;master&#39;
+Your branch is up to date with &#39;origin/master&#39;.
 Repository multi-tenancy-gitops-infra found but not cloned... cloning repository
-Cloning into <span class=s1>&#39;multi-tenancy-gitops-infra&#39;</span>...
+Cloning into &#39;multi-tenancy-gitops-infra&#39;...
 ...
 Repository multi-tenancy-gitops-services found but not cloned... cloning repository
-Cloning into <span class=s1>&#39;multi-tenancy-gitops-services&#39;</span>...
+Cloning into &#39;multi-tenancy-gitops-services&#39;...
 ...
-Creating repos <span class=k>for</span> Cloud Pak examples
+Creating repos for Cloud Pak examples
 Repository multi-tenancy-gitops-apps found but not cloned... cloning repository
-Cloning into <span class=s1>&#39;multi-tenancy-gitops-apps&#39;</span>...
+Cloning into &#39;multi-tenancy-gitops-apps&#39;...
 ...
-Your branch is up to date with <span class=s1>&#39;origin/master&#39;</span>.
+Your branch is up to date with &#39;origin/master&#39;.
 </code></pre></div> <p>See how the output shows that the sample repositories have been successfully created and cloned. Let's now check that this has happened.</p> <p><br></p> </li> <li> <p><em>Verify the new repositories in your GitHub organization</em></p> <p>Let's examine the newly created repositories in your GitHub organization.</p> <p>The following command will print the URL of your Git organization:</p> <div class=highlight><pre><span></span><code><span class=nb>echo</span> https://github.com/orgs/<span class=nv>$GIT_ORG</span>/repositories
 </code></pre></div> <p>for example:</p> <div class="no-copy highlight"><pre><span></span><code>https://github.com/orgs/tutorial-org-123/repositories
 </code></pre></div> <p>Use your browser to locate this URL. See how your organization has the following repositories:</p> <p><img alt=diagram8 src=/snippets/images-gitops-repo/diagram9.png style=max-height:600px></p> <p>These are the GitOps repositories that are used to sync the cluster:</p> <ul> <li><code>multi-tenancy-gitops</code> contains the YAML files that describe a set of ArgoCD applications. It's these ArgoCD applications that synchronize the cluster with the following resources:<ul> <li><strong>infrastructure</strong> components such as Kubernetes namespaces, whose YAMLs are defined in <code>multi-tenancy-gitops-infra</code></li> <li><strong>service</strong> components such as Artifactory, Cloud Pak services or Sonarqube, whose YAMLs are defined in <code>multi-tenancy-gitops-services</code></li> <li><strong>application</strong> components such as queue managers, databases, workflow engines, integration servers... whose YAMLs are defined in <code>multi-tenancy-gitops-apps</code></li> </ul> </li> <li><code>multi-tenancy-gitops-infra</code> contains a library of infrastructure component YAMLs that are referenced by the ArgoCD applications. There are a fixed number of these YAMLs and they come preloaded with this repository.</li> <li><code>multi-tenancy-gitops-services</code> contains a library of service component YAMLs that are referenced by the ArgoCD applications. There are a fixed number of these and they come preloaded with this repository.</li> <li><code>multi-tenancy-gitops-apps</code> contains a the set of application component YAMLs that are references by the ArgoCD applications. There are a variable number of these, corresponding to the number of application components that are being deployed in a given configuration. This repository is populated by the Tekton pipelines using the source repositories for these components. For example, a source repository containing a database configuration might be used to build the database YAMLs for deployment of that database to the cluster.</li> </ul> <p>Feel free to examine these repositories; we'll look at them in much more detail later.</p> <p><br></p> </li> <li> <p><em>Verify the new repositories cloned to your local machine</em></p> <p>These repositories have also been cloned to your local machine under the <code>$GIT_ROOT</code> folder.</p> <p>Issue the following command:</p> <div class=highlight><pre><span></span><code>tree . -L <span class=m>1</span>
