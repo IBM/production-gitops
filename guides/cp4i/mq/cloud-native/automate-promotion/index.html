@@ -571,13 +571,13 @@ git push origin <span class=nv>$GIT_BRANCH</span>
 </code></pre></div> </li> <li> <p><em>Update the GitOps repository</em></p> <p>Let’s commit these changes to make the event listener and trigger resources active in the cluster.</p> <p>Issue the following command:</p> <div class=highlight><pre><span></span><code>git add mq/environments/ci/kustomization.yaml
 git commit -s -m <span class=s2>&quot;Add PostSync hook components&quot;</span>
 git push origin <span class=nv>$GIT_BRANCH</span>
-</code></pre></div> <p>which shows that the changes are pushed to GitHub:</p> <div class=highlight><pre><span></span><code>Enumerating objects: <span class=m>20</span>, <span class=k>done</span>.
-Counting objects: <span class=m>100</span>% <span class=o>(</span><span class=m>18</span>/18<span class=o>)</span>, <span class=k>done</span>.
-Delta compression using up to <span class=m>16</span> threads
-Compressing objects: <span class=m>100</span>% <span class=o>(</span><span class=m>10</span>/10<span class=o>)</span>, <span class=k>done</span>.
-Writing objects: <span class=m>100</span>% <span class=o>(</span><span class=m>10</span>/10<span class=o>)</span>, <span class=m>928</span> bytes <span class=p>|</span> <span class=m>928</span>.00 KiB/s, <span class=k>done</span>.
-Total <span class=m>10</span> <span class=o>(</span>delta <span class=m>8</span><span class=o>)</span>, reused <span class=m>0</span> <span class=o>(</span>delta <span class=m>0</span><span class=o>)</span>, pack-reused <span class=m>0</span>
-remote: Resolving deltas: <span class=m>100</span>% <span class=o>(</span><span class=m>8</span>/8<span class=o>)</span>, completed with <span class=m>5</span> <span class=nb>local</span> objects.
+</code></pre></div> <p>which shows that the changes are pushed to GitHub:</p> <div class="no-copy highlight"><pre><span></span><code>Enumerating objects: 20, done.
+Counting objects: 100% (18/18), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (10/10), done.
+Writing objects: 100% (10/10), 928 bytes | 928.00 KiB/s, done.
+Total 10 (delta 8), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (8/8), completed with 5 local objects.
 To https://github.com/prod-ref-guide/multi-tenancy-gitops-apps.git
   239e49d..3a32a17  master -&gt; master      
 </code></pre></div> <p>This change to the GitOps repository can now be used by ArgoCD.</p> </li> </ol> <h3 id=modify-the-charts-in-dev>Modify the charts in dev<a class=headerlink href=#modify-the-charts-in-dev title="Permanent link">&para;</a></h3> <ol> <li> <p><em>Add PostSync hook to <code>mq-infra</code> chart</em></p> <p>Issue the following commands to modify the <code>mq-infra</code> chart <code>requirements.yaml</code>:</p> <div class=highlight><pre><span></span><code>vi mq/environments/dev/mq-infra/requirements.yaml
@@ -636,7 +636,7 @@ To https://github.com/prod-ref-guide/multi-tenancy-gitops-apps.git
 <span class=w>  </span><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">0.1.0</span><span class=w></span>
 <span class=w>  </span><span class=nt>repository</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">https://cloud-native-toolkit.github.io/prod-ref-guide-charts/</span><span class=w></span>
 </code></pre></div> <p>Issue the following command to verify:</p> <div class=highlight><pre><span></span><code>cat mq/environments/dev/mq-spring-app/requirements.yaml
-</code></pre></div> <p>to show the <code>requirements.yaml</code> we created earlier:</p> <div class=highlight><pre><span></span><code><span class=nt>dependencies</span><span class=p>:</span><span class=w></span>
+</code></pre></div> <p>to show the <code>requirements.yaml</code> we created earlier:</p> <div class="no-copy highlight"><pre><span></span><code><span class=nt>dependencies</span><span class=p>:</span><span class=w></span>
 <span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-spring-app</span><span class=w></span>
 <span class=w>    </span><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">0.0.11</span><span class=w></span>
 <span class=w>    </span><span class=nt>repository</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">http://artifactory-artifactory.tools:8082/artifactory/generic-local/ci</span><span class=w></span>
@@ -663,7 +663,7 @@ To https://github.com/prod-ref-guide/multi-tenancy-gitops-apps.git
 <span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class=s>&quot;{}&quot;</span><span class=w></span>
 <span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class=s>&quot;&lt;replace</span><span class=nv> </span><span class=s>with</span><span class=nv> </span><span class=s>the</span><span class=nv> </span><span class=s>mq-spring-app</span><span class=nv> </span><span class=s>dev</span><span class=nv> </span><span class=s>eventlistener</span><span class=nv> </span><span class=s>route&gt;&quot;</span><span class=w></span>
 </code></pre></div> <p>Issue the following command to verify:</p> <div class=highlight><pre><span></span><code>cat mq/environments/dev/mq-spring-app/values.yaml
-</code></pre></div> <p>to show the <code>values.yaml</code> we modified earlier:</p> <div class=highlight><pre><span></span><code><span class=nt>global</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">{}</span><span class=w></span>
+</code></pre></div> <p>to show the <code>values.yaml</code> we modified earlier:</p> <div class="no-copy highlight"><pre><span></span><code><span class=nt>global</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">{}</span><span class=w></span>
 <span class=nt>mq-spring-app</span><span class=p>:</span><span class=w></span>
 <span class=w>  </span><span class=nt>replicaCount</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class=w></span>
 <span class=nt>post-sync-job</span><span class=p>:</span><span class=w></span>
