@@ -176,15 +176,15 @@ sh ./cntk-event-listener.sh
 <span class=w>    </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-infra-dev</span><span class=w></span>
 <span class=w>    </span><span class=nt>template</span><span class=p>:</span><span class=w></span>
 <span class=w>      </span><span class=nt>ref</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-infra-dev</span><span class=w></span>
-<span class=w>  </span><span class=c1># - bindings:</span><span class=w></span>
-<span class=w>  </span><span class=c1>#   - kind: TriggerBinding</span><span class=w></span>
-<span class=w>  </span><span class=c1>#     ref: cnkt-trigger-binding</span><span class=w></span>
-<span class=w>  </span><span class=c1>#   interceptors:</span><span class=w></span>
-<span class=w>  </span><span class=c1>#   - cel:</span><span class=w></span>
-<span class=w>  </span><span class=c1>#       filter: header.match(&#39;X-GitHub-Event&#39;, &#39;push&#39;) &amp;&amp; body.ref == &#39;refs/heads/qm1-prod-ref-guide-test&#39; &amp;&amp; body.repository.full_name == &#39;prod-ref-guide-test/mq-spring-app&#39;</span><span class=w></span>
-<span class=w>  </span><span class=c1>#   name: mq-spring-app-dev</span><span class=w></span>
-<span class=w>  </span><span class=c1>#   template:</span><span class=w></span>
-<span class=w>  </span><span class=c1>#     ref: mq-spring-app-dev</span><span class=w></span>
+<span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>bindings</span><span class=p>:</span><span class=w></span>
+<span class=w>    </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">TriggerBinding</span><span class=w></span>
+<span class=w>      </span><span class=nt>ref</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">cnkt-trigger-binding</span><span class=w></span>
+<span class=w>    </span><span class=nt>interceptors</span><span class=p>:</span><span class=w></span>
+<span class=w>    </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>cel</span><span class=p>:</span><span class=w></span>
+<span class=w>        </span><span class=nt>filter</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">header.match(&#39;X-GitHub-Event&#39;, &#39;push&#39;) &amp;&amp; body.ref == &#39;refs/heads/qm1-prod-ref-guide-test&#39; &amp;&amp; body.repository.full_name == &#39;prod-ref-guide-test/mq-spring-app&#39;</span><span class=w></span>
+<span class=w>    </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-spring-app-dev</span><span class=w></span>
+<span class=w>    </span><span class=nt>template</span><span class=p>:</span><span class=w></span>
+<span class=w>      </span><span class=nt>ref</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-spring-app-dev</span><span class=w></span>
 </code></pre></div> <p>An event listener can produce one or more triggers as specified by the list <code>spec.triggers:</code>. Now, our event listener additionally produces a trigger called <code>mq-spring-app-dev</code> along with <code>mq-infra-dev</code>. This trigger comprises the template <code>mq-spring-app-dev</code> and template binding <code>cntk-trigger-binding</code>.</p> </li> <li> <p><em>Push GitOps changes to GitHub</em></p> <p>Let’s make these GitOps changes and push them.</p> <p>Add all changes in the current folder to a git index, commit them, and push them to GitHub:</p> <div class=highlight><pre><span></span><code>git add .
 git commit -s -m <span class=s2>&quot;Customizing the event trigger&quot;</span>
 git push origin <span class=nv>$GIT_BRANCH</span>
