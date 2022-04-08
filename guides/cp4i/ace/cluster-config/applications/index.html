@@ -38,12 +38,13 @@
 ├── config
 │   └── argocd
 └── environments
+    ├── base
     ├── ci
-    ├── cphtesttool
-    ├── mq-infra
-    ├── mq-spring-app
+    ├── dev
+    ├── prod
+    ├── staging
     └── tools
-</code></pre></div> <p>Notice how:</p> <ul> <li>the <code>config/argocd</code> folder contains the ArgoCD applications that manage the MQ application components deployed to the cluster.</li> <li>the <code>environments</code> folder contains one subfolder for each MQ application component deployed to the cluster, including MQ applications and queue managers.</li> </ul> <p><br></p> </li> <li> <p><em>ArgoCD applications</em></p> <p>Let's explore the folder structure to see how ArgoCD manages the cluster for these application components.</p> <p>Issue the following command:</p> <div class=highlight><pre><span></span><code>tree ./mq/config/argocd -L <span class=m>2</span>
+</code></pre></div> <p>Notice how:</p> <ul> <li>the <code>config/argocd</code> folder contains the ArgoCD applications that manage the MQ application components deployed to the cluster.</li> <li>the <code>environments</code> folder contains one subfolder for each environment on the cluster, including MQ applications and queue managers.</li> </ul> <p><br></p> </li> <li> <p><em>ArgoCD applications</em></p> <p>Let's explore the folder structure to see how ArgoCD manages the cluster for these application components.</p> <p>Issue the following command:</p> <div class=highlight><pre><span></span><code>tree ./mq/config/argocd -L <span class=m>2</span>
 </code></pre></div> <p>to show the ArgoCD applications:</p> <div class="no-copy highlight"><pre><span></span><code>./mq/config/argocd
 ├── ci
 │   ├── ci-app-rest.yaml
@@ -89,6 +90,11 @@ spec:
      - Replace=true
 </code></pre></div> <p>Notice how this ArgoCD application will use:</p> <ul> <li>the <code>path: mq/environments/mq-infra/overlays/dev</code> element to identify the folder location containing the queue manager YAMLs that will be applied to the cluster.</li> <li>the <code>repoURL:</code> identifies the GitHUb repository; we'll need to customize this value for our deployment.</li> </ul> <p>You can learn more about the different YAML elements in an ArgoCD application in the <a href=https://argocd-operator.readthedocs.io/en/latest/reference/argocd/ >ArgoCD API reference</a>.</p> <p><br></p> <p>There are <strong>many</strong> ArgoCD applications like this in the <code>-apps</code> repository; each one is responsible for managing the deployment of any application component to the cluster, including its related resources such as configmaps and certificates.</p> <p><br></p> </li> <li> <p><em>The</em> <code>environments</code> <em>folder</em></p> <p>As we've seen in our example, the ArgoCD applications refer to YAMLs in the <code>environments</code> folder; let's explore the <code>environments</code> folder in more detail.</p> <p>Issue the following command:</p> <div class=highlight><pre><span></span><code>tree ./mq/environments -L <span class=m>2</span>
 </code></pre></div> <p>to see the wide range of YAMLs in this folder:</p> <div class="no-copy highlight"><pre><span></span><code>./mq/environments
+├── base
+│   ├── kustomization.yaml
+│   ├── mq-infra
+│   ├── mq-metric-samples
+│   └── mq-spring-app
 ├── ci
 │   ├── certificates
 │   ├── configmaps
@@ -102,47 +108,188 @@ spec:
 │   ├── tasks
 │   ├── triggerbindings
 │   └── triggertemplates
-├── cphtesttool
-│   └── scc
-├── mq-infra
-│   ├── base
-│   └── overlays
-├── mq-spring-app
-│   ├── base
-│   └── overlays
+├── dev
+│   ├── mq-infra
+│   ├── mq-metric-samples
+│   └── mq-spring-app
+├── prod
+│   ├── mq-infra
+│   ├── mq-metric-samples
+│   └── mq-spring-app
+├── staging
+│   ├── cphtesttool
+│   ├── mq-infra
+│   ├── mq-metric-samples
+│   └── mq-spring-app
 └── tools
     ├── certificates
     ├── cluster-issuers
     └── kustomization.yaml
-</code></pre></div> <p>As the cluster grows, more YAMLs will be added to the <code>environments</code> folder. These YAMLs are referenced by corresponding ArgoCD YAMLs in the <code>.../config/argocd/</code> folder.</p> <p><br></p> </li> <li> <p><em>The resource YAMLs</em></p> <p>When a pipeline successfully builds and tests an application component from a source repository, it stores its output YAML in the <code>-apps</code> repository.</p> <p>Issue the following command:</p> <div class=highlight><pre><span></span><code>tree ./mq/environments/mq-infra -L <span class=m>3</span>
-</code></pre></div> <p>to show the contents of the folder that will contain the YAML for the <code>mq-infra</code> queue manager:</p> <div class="no-copy highlight"><pre><span></span><code>./mq/environments/mq-infra
+</code></pre></div> <p>As the cluster grows, more YAMLs will be added to the <code>environments</code> folder. These YAMLs are referenced by corresponding ArgoCD YAMLs in the <code>.../config/argocd/</code> folder.</p> <p><br></p> </li> <li> <p><em>The resource YAMLs</em></p> <p>When a pipeline successfully builds and tests an application component from a source repository, it stores its output YAML in the <code>-apps</code> repository.</p> <p>Issue the following command:</p> <div class=highlight><pre><span></span><code>tree ./mq/environments/ -L <span class=m>3</span>
+</code></pre></div> <p>to show the contents of the folder that will contain the YAMLs for the <code>mq-infra</code>, <code>mq-spring-app</code> and <code>mq-metric-samples</code> :</p> <div class="no-copy highlight"><pre><span></span><code>./mq/environments/
 ├── base
 │   ├── kustomization.yaml
-│   └── mq-infra
-│       └── qm-template.yaml
-└── overlays
-    ├── dev
-    │   ├── certificates
-    │   ├── configmap
-    │   ├── configmap-security
-    │   ├── kustomization.yaml
-    │   ├── mq-infra
-    │   └── secrets
-    ├── prod
-    │   ├── certificates
-    │   ├── configmap
-    │   ├── configmap-security
-    │   ├── kustomization.yaml
-    │   ├── mq-infra
-    │   └── secrets
-    └── staging
-        ├── certificates
-        ├── configmap
-        ├── configmap-security
-        ├── kustomization.yaml
-        ├── mq-infra
-        └── secrets
-</code></pre></div> <p>Notice how:</p> <ul> <li>There is a subfolder corresponding to the <code>dev</code>, <code>stage</code> and <code>prod</code> instances of this queue manager.</li> <li>Each of these folders will use Kustomize to override the <code>base</code> YAML is <code>qm-template.yaml</code>.</li> </ul> <p><br></p> <p>We'll explore this folder structure in more detail as we progress through the tutorial.</p> <p><br></p> </li> </ol> <hr> <h2 id=tailor-the-apps-repository>Tailor the -apps repository<a class=headerlink href=#tailor-the-apps-repository title="Permanent link">&para;</a></h2> <p>As we've just seen, before the cloned <code>multi-tenancy-gitops-apps</code> can be used to store application component YAML files, it must be customized.</p> <p>Once we've customized the local repository, we'll push our updates back to our repository branch on GitHub where it can be accessed by ArgoCD running in our cluster.</p> <ol> <li> <p><em>Locate the multi-tenancy-gitops-apps repository</em></p> <div class="admonition tip"> <p class=admonition-title>Tip</p> <p>Ensure you're in the <code>multi-tenancy-gitops-apps</code> <strong>terminal window</strong> before you start to customize the <code>-apps</code> repository.</p> </div> <p>Issue the following command to change to your GitOps repository:</p> <div class=highlight><pre><span></span><code><span class=nb>cd</span> <span class=nv>$GIT_ROOT</span>
+│   ├── mq-infra
+│   │   └── qm-template.yaml
+│   ├── mq-metric-samples
+│   │   ├── deployment.yaml
+│   │   ├── role.yaml
+│   │   ├── rolebinding.yaml
+│   │   ├── route.yaml
+│   │   ├── secret.yaml
+│   │   ├── service.yaml
+│   │   ├── serviceaccount.yaml
+│   │   └── servicemonitor.yaml
+│   └── mq-spring-app
+│       ├── deployment.yaml
+│       ├── jaegerconfigmap.yaml
+│       ├── route.yaml
+│       ├── service.yaml
+│       └── serviceaccount.yaml
+├── ci
+│   ├── certificates
+│   │   ├── ci-mq-client-certificate.sh
+│   │   ├── ci-mq-client-certificate.yaml_template
+│   │   ├── ci-mq-server-certificate.sh
+│   │   └── ci-mq-server-certificate.yaml_template
+│   ├── configmaps
+│   │   ├── gitops-repo-configmap.sh
+│   │   └── gitops-repo-configmap.yaml_template
+│   ├── eventlisteners
+│   │   ├── cntk-event-listener.sh
+│   │   ├── cntk-event-listener.yaml_template
+│   │   ├── mq-infra-dev-eventlistener.yaml
+│   │   ├── mq-infra-stage-eventlistener.yaml
+│   │   ├── mq-spring-app-dev-eventlistener.yaml
+│   │   └── mq-spring-app-stage-eventlistener.yaml
+│   ├── kustomization.yaml
+│   ├── pipelines
+│   │   ├── ibm-test-pipeline-for-dev.yaml
+│   │   ├── ibm-test-pipeline-for-stage.yaml
+│   │   ├── java-maven-dev-pipeline.yaml
+│   │   ├── mq-metric-samples-dev-pipeline.yaml
+│   │   ├── mq-pipeline-dev.yaml
+│   │   └── mq-spring-app-dev-pipeline.yaml
+│   ├── roles
+│   │   ├── custom-ci-pipeline-sa-rolebinding.yaml
+│   │   ├── custom-dev-pipeline-sa-rolebinding.yaml
+│   │   ├── custom-pipeline-sa-clusterrole.yaml
+│   │   ├── custom-pipeline-sa-role.yaml
+│   │   ├── custom-prod-pipeline-sa-rolebinding.yaml
+│   │   └── custom-staging-pipeline-sa-rolebinding.yaml
+│   ├── routes
+│   │   ├── cntk-route.yaml
+│   │   ├── mq-infra-dev-route.yaml
+│   │   ├── mq-infra-stage-route.yaml
+│   │   ├── mq-spring-app-dev-route.yaml
+│   │   └── mq-spring-app-stage-route.yaml
+│   ├── scc
+│   │   ├── Chart.yaml
+│   │   └── values.yaml
+│   ├── secrets
+│   │   ├── artifactory-access-secret.sh
+│   │   ├── artifactory-access-secret.yaml
+│   │   ├── git-credentials-secret.sh
+│   │   ├── git-credentials-secret.yaml
+│   │   ├── ibm-entitled-registry-credentials-secret.sh
+│   │   ├── ibm-entitled-registry-credentials-secret.yaml
+│   │   ├── mq-client-jks-password-secret.sh
+│   │   └── mq-client-jks-password-secret.yaml
+│   ├── tasks
+│   │   ├── 10-gitops-for-mq.yaml
+│   │   ├── 10-gitops-promotion.yaml
+│   │   ├── 10-gitops.yaml
+│   │   ├── 11-app-name.yaml
+│   │   ├── 12-functional-tests.yaml
+│   │   ├── 13-cphtestp-performance-test.yaml
+│   │   ├── 13-jmeter-performance-test.yaml
+│   │   ├── 4-smoke-tests-mq.yaml
+│   │   ├── 4-smoke-tests.yaml
+│   │   ├── ibm-build-tag-push-v2-6-13.yaml
+│   │   ├── ibm-helm-release-v2-6-13.yaml
+│   │   ├── ibm-img-release-v2-6-13.yaml
+│   │   ├── ibm-img-scan-v2-6-13.yaml
+│   │   ├── ibm-java-maven-test-v2-6-13.yaml
+│   │   ├── ibm-setup-v2-6-13.yaml
+│   │   ├── ibm-tag-release-v2-6-13.yaml
+│   │   └── mq-metrics-build-tag-push.yaml
+│   ├── triggerbindings
+│   │   └── cntk-binding.yaml
+│   └── triggertemplates
+│       ├── mq-infra-dev-triggertemplate.sh
+│       ├── mq-infra-dev-triggertemplate.yaml_template
+│       ├── mq-infra-dev.yaml
+│       ├── mq-infra-stage-triggertemplate.sh
+│       ├── mq-infra-stage-triggertemplate.yaml_template
+│       ├── mq-spring-app-dev-triggertemplate.sh
+│       ├── mq-spring-app-dev-triggertemplate.yaml_template
+│       ├── mq-spring-app-dev.yaml
+│       ├── mq-spring-app-stage-triggertemplate.sh
+│       └── mq-spring-app-stage-triggertemplate.yaml_template
+├── dev
+│   ├── mq-infra
+│   │   ├── certificates
+│   │   ├── configmap
+│   │   ├── configmap-security
+│   │   ├── kustomization.yaml
+│   │   ├── mq-infra
+│   │   └── secrets
+│   ├── mq-metric-samples
+│   │   ├── configmap
+│   │   ├── kustomization.yaml
+│   │   └── mq-metric-samples
+│   └── mq-spring-app
+│       ├── certificates
+│       ├── configmap
+│       ├── kustomization.yaml
+│       ├── mq-spring-app
+│       └── secrets
+├── prod
+│   ├── mq-infra
+│   │   ├── certificates
+│   │   ├── configmap
+│   │   ├── configmap-security
+│   │   ├── kustomization.yaml
+│   │   ├── mq-infra
+│   │   └── secrets
+│   ├── mq-metric-samples
+│   │   ├── configmap
+│   │   ├── kustomization.yaml
+│   │   └── mq-metric-samples
+│   └── mq-spring-app
+│       ├── certificates
+│       ├── configmap
+│       ├── kustomization.yaml
+│       ├── mq-spring-app
+│       └── secrets
+├── staging
+│   ├── cphtesttool
+│   │   └── scc
+│   ├── mq-infra
+│   │   ├── certificates
+│   │   ├── configmap
+│   │   ├── configmap-security
+│   │   ├── kustomization.yaml
+│   │   ├── mq-infra
+│   │   └── secrets
+│   ├── mq-metric-samples
+│   │   ├── configmap
+│   │   ├── kustomization.yaml
+│   │   └── mq-metric-samples
+│   └── mq-spring-app
+│       ├── certificates
+│       ├── configmap
+│       ├── kustomization.yaml
+│       ├── mq-spring-app
+│       └── secrets
+└── tools
+    ├── certificates
+    │   └── mq-selfsigned-certificate
+    ├── cluster-issuers
+    │   ├── mq-selfsigned-clusterissuer
+    │   └── selfsigned-clusterissuer
+    └── kustomization.yaml
+</code></pre></div> <p>Notice how:</p> <ul> <li>There is a folder corresponding to the <code>dev</code>, <code>stage</code> and <code>prod</code> instances of the queue manager, sample spring applications and metrics sample.</li> <li>Each of these folders will use Kustomize to override the <code>base</code> YAMLs.</li> </ul> <p><br></p> <p>We'll explore this folder structure in more detail as we progress through the tutorial.</p> <p><br></p> </li> </ol> <hr> <h2 id=tailor-the-apps-repository>Tailor the -apps repository<a class=headerlink href=#tailor-the-apps-repository title="Permanent link">&para;</a></h2> <p>As we've just seen, before the cloned <code>multi-tenancy-gitops-apps</code> can be used to store application component YAML files, it must be customized.</p> <p>Once we've customized the local repository, we'll push our updates back to our repository branch on GitHub where it can be accessed by ArgoCD running in our cluster.</p> <ol> <li> <p><em>Locate the multi-tenancy-gitops-apps repository</em></p> <div class="admonition tip"> <p class=admonition-title>Tip</p> <p>Ensure you're in the <code>multi-tenancy-gitops-apps</code> <strong>terminal window</strong> before you start to customize the <code>-apps</code> repository.</p> </div> <p>Issue the following command to change to your GitOps repository:</p> <div class=highlight><pre><span></span><code><span class=nb>cd</span> <span class=nv>$GIT_ROOT</span>
 <span class=nb>cd</span> multi-tenancy-gitops-apps
 </code></pre></div> <p><br></p> </li> <li> <p><em>Run the customization script</em></p> <p>Let's customize the cloned <code>multi-tenancy-gitops-apps</code> repository with the relevant <code>$GIT_BRANCH</code> and <code>$GIT_ORG</code> values for our cluster.</p> <p>The sample GitOps repository provides the <code>set-git-source.sh</code> script to make this task easy.</p> <p>Run script to replace the git url and branch to your git organization where you created the git repositories:</p> <div class=highlight><pre><span></span><code>./scripts/set-git-source.sh
 </code></pre></div> <p>The script will list customizations it will use and all the files that it customizes:</p> <div class="no-copy highlight"><pre><span></span><code>Setting kustomization patches to https://github.com/prod-ref-guide/multi-tenancy-gitops.git on branch master

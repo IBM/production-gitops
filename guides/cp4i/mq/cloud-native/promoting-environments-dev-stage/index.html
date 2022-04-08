@@ -277,38 +277,36 @@ tree mq/environments/ci/pipelines/
 <span class=nb>cd</span> multi-tenancy-gitops-apps
 </code></pre></div> <p>Issue the following commands to merge the local branch:</p> <div class=highlight><pre><span></span><code>git fetch origin
 git merge origin/<span class=nv>$GIT_BRANCH</span>
-</code></pre></div> <p>which shows our local branch being updated:</p> <div class="no-copy highlight"><pre><span></span><code>Updating c91b3e2..48a05a0
+</code></pre></div> <p>which shows our local branch being updated:</p> <div class="no-copy highlight"><pre><span></span><code>Updating 77902fd..69194f8
 Fast-forward
- mq/environments/mq-infra/overlays/staging/mq-infra/configmap.yaml           |  17 ++++++
- mq/environments/mq-infra/overlays/staging/mq-infra/qm-template.yaml         |  80 ++++++++++++++++++++++++++++
- mq/environments/mq-spring-app/overlays/dev/mq-spring-app/deployment.yaml    |   6 +--
- mq/environments/mq-spring-app/overlays/dev/mq-spring-app/service.yaml       |   2 +-
- .../mq-spring-app/overlays/staging/mq-spring-app/configmap-ccdt.yaml        |  25 +++++++++
- mq/environments/mq-spring-app/overlays/staging/mq-spring-app/configmap.yaml |  12 +++++
- .../mq-spring-app/overlays/staging/mq-spring-app/deployment.yaml            | 100 +++++++++++++++++++++++++++++++++++
- .../mq-spring-app/overlays/staging/mq-spring-app/jaegerconfigmap.yaml       |   8 +++
- mq/environments/mq-spring-app/overlays/staging/mq-spring-app/route.yaml     |  16 ++++++
- mq/environments/mq-spring-app/overlays/staging/mq-spring-app/service.yaml   |  21 ++++++++
- .../mq-spring-app/overlays/staging/mq-spring-app/serviceaccount.yaml        |   7 +++
- 11 files changed, 290 insertions(+), 4 deletions(-)
- create mode 100644 mq/environments/mq-infra/overlays/staging/mq-infra/configmap.yaml
- create mode 100644 mq/environments/mq-infra/overlays/staging/mq-infra/qm-template.yaml
- create mode 100644 mq/environments/mq-spring-app/overlays/staging/mq-spring-app/configmap-ccdt.yaml
- create mode 100644 mq/environments/mq-spring-app/overlays/staging/mq-spring-app/configmap.yaml
- create mode 100644 mq/environments/mq-spring-app/overlays/staging/mq-spring-app/deployment.yaml
- create mode 100644 mq/environments/mq-spring-app/overlays/staging/mq-spring-app/jaegerconfigmap.yaml
- create mode 100644 mq/environments/mq-spring-app/overlays/staging/mq-spring-app/route.yaml
- create mode 100644 mq/environments/mq-spring-app/overlays/staging/mq-spring-app/service.yaml
- create mode 100644 mq/environments/mq-spring-app/overlays/staging/mq-spring-app/serviceaccount.yaml
-</code></pre></div> <p>Notice how these files correspond to the resources created in the GitOps apps repository by the <code>ibm-mq-promote-dev-stage</code> pipeline run.</p> </li> <li> <p><em>Explore the resources in the GitOps Apps repository</em></p> <p>Let's examine the newly produced resources in the GitOps apps repository; it was created by the previous pipeline runs.</p> <p>Issue the following command:</p> <div class=highlight><pre><span></span><code>tree mq/environments/mq-infra/overlays/staging/mq-infra/
-</code></pre></div> <p>which shows the newly produced resources:</p> <div class="no-copy highlight"><pre><span></span><code>mq/environments/mq-infra/overlays/staging/mq-infra/
+ mq/environments/staging/mq-infra/mq-infra/configmap.yaml                 |  18 +++++++++++
+ mq/environments/staging/mq-infra/mq-infra/qm-template.yaml               |  80 +++++++++++++++++++++++++++++++++++++++++++++++++
+ mq/environments/staging/mq-spring-app/mq-spring-app/configmap-ccdt.yaml  |  25 ++++++++++++++++
+ mq/environments/staging/mq-spring-app/mq-spring-app/configmap.yaml       |  12 ++++++++
+ mq/environments/staging/mq-spring-app/mq-spring-app/deployment.yaml      | 100 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ mq/environments/staging/mq-spring-app/mq-spring-app/jaegerconfigmap.yaml |   8 +++++
+ mq/environments/staging/mq-spring-app/mq-spring-app/route.yaml           |  16 ++++++++++
+ mq/environments/staging/mq-spring-app/mq-spring-app/service.yaml         |  21 +++++++++++++
+ mq/environments/staging/mq-spring-app/mq-spring-app/serviceaccount.yaml  |   7 +++++
+ 9 files changed, 287 insertions(+)
+ create mode 100644 mq/environments/staging/mq-infra/mq-infra/configmap.yaml
+ create mode 100644 mq/environments/staging/mq-infra/mq-infra/qm-template.yaml
+ create mode 100644 mq/environments/staging/mq-spring-app/mq-spring-app/configmap-ccdt.yaml
+ create mode 100644 mq/environments/staging/mq-spring-app/mq-spring-app/configmap.yaml
+ create mode 100644 mq/environments/staging/mq-spring-app/mq-spring-app/deployment.yaml
+ create mode 100644 mq/environments/staging/mq-spring-app/mq-spring-app/jaegerconfigmap.yaml
+ create mode 100644 mq/environments/staging/mq-spring-app/mq-spring-app/route.yaml
+ create mode 100644 mq/environments/staging/mq-spring-app/mq-spring-app/service.yaml
+ create mode 100644 mq/environments/staging/mq-spring-app/mq-spring-app/serviceaccount.yaml
+</code></pre></div> <p>Notice how these files correspond to the resources created in the GitOps apps repository by the <code>ibm-mq-promote-dev-stage</code> pipeline run.</p> </li> <li> <p><em>Explore the resources in the GitOps Apps repository</em></p> <p>Let's examine the newly produced resources in the GitOps apps repository; it was created by the previous pipeline runs.</p> <p>Issue the following command:</p> <div class=highlight><pre><span></span><code>tree mq/environments/staging/mq-infra/mq-infra/
+</code></pre></div> <p>which shows the newly produced resources:</p> <div class="no-copy highlight"><pre><span></span><code>mq/environments/staging/mq-infra/mq-infra/
 ├── configmap.yaml
 ├── hooks
 │   ├── post-sync-job.sh
 │   └── post-sync-job.yaml_template
 └── qm-template.yaml
-</code></pre></div> <p>Notice that:</p> <ul> <li>The template for <code>Queue Manager</code> was created in the <code>mq/environments/mq-infra/overlays/staging/mq-infra/</code> folder to reflect the fact this queue manager is part of the <strong>applications</strong> layer.</li> <li>The resource was created in the <code>staging</code> subfolder to reflect the fact that it's going to be deployed to the <code>staging</code> namespace.</li> <li>The resource was created in a new folder <code>/mq-infra</code>. This folder is dedicated to <code>Queue Manager</code>.</li> </ul> <p>Issue the following command:</p> <div class=highlight><pre><span></span><code>tree mq/environments/mq-spring-app/overlays/staging/mq-spring-app/
-</code></pre></div> <p>which shows the newly produced resources:</p> <div class="no-copy highlight"><pre><span></span><code>mq/environments/mq-spring-app/overlays/staging/mq-spring-app/
+</code></pre></div> <p>Notice that:</p> <ul> <li>The template for <code>Queue Manager</code> was created in the <code>mq/environments/staging/mq-infra/mq-infra/</code> folder to reflect the fact this queue manager is part of the <strong>applications</strong> layer.</li> <li>The resource was created in the <code>staging</code> subfolder to reflect the fact that it's going to be deployed to the <code>staging</code> namespace.</li> <li>The resource was created in a new folder <code>/mq-infra</code>. This folder is dedicated to <code>Queue Manager</code>.</li> </ul> <p>Issue the following command:</p> <div class=highlight><pre><span></span><code>tree mq/environments/staging/mq-spring-app/mq-spring-app/
+</code></pre></div> <p>which shows the newly produced resources:</p> <div class="no-copy highlight"><pre><span></span><code>mq/environments/staging/mq-spring-app/mq-spring-app/
 ├── configmap-ccdt.yaml
 ├── configmap.yaml
 ├── deployment.yaml
@@ -319,7 +317,7 @@ Fast-forward
 ├── route.yaml
 ├── service.yaml
 └── serviceaccount.yaml
-</code></pre></div> <p>Notice that:</p> <ul> <li>The resources for <code>MQ Sample application</code> was created in the <code>mq/environments/mq-spring-app/overlays/staging/mq-spring-app/</code> folder to reflect the fact this application is part of the <strong>applications</strong> layer.</li> <li>The resources were created in the <code>staging</code> subfolder to reflect the fact that it's going to be deployed to the <code>staging</code> namespace.</li> <li>The resources were created in a new folder <code>/mq-spring-app</code>. This folder is dedicated to <code>MQ Sample application</code>.</li> </ul> </li> </ol> <hr> <h2 id=activate-argocd-applications>Activate ArgoCD Applications<a class=headerlink href=#activate-argocd-applications title="Permanent link">&para;</a></h2> <p>We're now going to activate the ArgoCD applications to manage the deployment of <code>Queue Manager</code> and <code>MQ Sample application</code> to the <code>staging</code> namespace.</p> <ol> <li> <p><em>Ensure you're logged in to the cluster</em></p> <p>Start a terminal window and log into your OCP cluster, substituting the <code>--token</code> and <code>--server</code> parameters with your values:</p> <div class=highlight><pre><span></span><code>oc login --token<span class=o>=</span>&lt;token&gt; --server<span class=o>=</span>&lt;server&gt;
+</code></pre></div> <p>Notice that:</p> <ul> <li>The resources for <code>MQ Sample application</code> was created in the <code>mq/environments/staging/mq-spring-app/mq-spring-app/</code> folder to reflect the fact this application is part of the <strong>applications</strong> layer.</li> <li>The resources were created in the <code>staging</code> subfolder to reflect the fact that it's going to be deployed to the <code>staging</code> namespace.</li> <li>The resources were created in a new folder <code>/mq-spring-app</code>. This folder is dedicated to <code>MQ Sample application</code>.</li> </ul> </li> </ol> <hr> <h2 id=activate-argocd-applications>Activate ArgoCD Applications<a class=headerlink href=#activate-argocd-applications title="Permanent link">&para;</a></h2> <p>We're now going to activate the ArgoCD applications to manage the deployment of <code>Queue Manager</code> and <code>MQ Sample application</code> to the <code>staging</code> namespace.</p> <ol> <li> <p><em>Ensure you're logged in to the cluster</em></p> <p>Start a terminal window and log into your OCP cluster, substituting the <code>--token</code> and <code>--server</code> parameters with your values:</p> <div class=highlight><pre><span></span><code>oc login --token<span class=o>=</span>&lt;token&gt; --server<span class=o>=</span>&lt;server&gt;
 </code></pre></div> <p>If you are unsure of these values, click your user ID in the OpenShift web console and select "Copy Login Command".</p> </li> <li> <p><em>Locate your GitOps repository</em></p> <p>If necessary, change to the root of your GitOps repository, which is stored in the <code>$GIT_ROOT</code> environment variable.</p> <p>Issue the following command to change to your GitOps repository:</p> <div class=highlight><pre><span></span><code><span class=nb>cd</span> <span class=nv>$GIT_ROOT</span>
 <span class=nb>cd</span> multi-tenancy-gitops
 </code></pre></div> </li> <li> <p><em>Select resources to deploy</em></p> <p>Access the <code>0-bootstrap/single-cluster/3-apps/kustomization.yaml</code>:</p> <div class=highlight><pre><span></span><code>cat <span class=m>0</span>-bootstrap/single-cluster/3-apps/kustomization.yaml
@@ -389,7 +387,7 @@ cat mq/config/argocd/staging/staging-mq-infra-instance.yaml
 <span class=w>    </span><span class=nt>server</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">https://kubernetes.default.svc</span><span class=w></span>
 <span class=w>  </span><span class=nt>project</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">applications</span><span class=w></span>
 <span class=w>  </span><span class=nt>source</span><span class=p>:</span><span class=w></span>
-<span class=w>    </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq/environments/mq-infra/overlays/staging</span><span class=w></span>
+<span class=w>    </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq/environments/staging/mq-infra/</span><span class=w></span>
 <span class=w>    </span><span class=nt>repoURL</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/prod-ref-guide/multi-tenancy-gitops-apps.git</span><span class=w></span>
 <span class=w>    </span><span class=nt>targetRevision</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">master</span><span class=w></span>
 <span class=w>  </span><span class=nt>syncPolicy</span><span class=p>:</span><span class=w></span>
@@ -398,7 +396,7 @@ cat mq/config/argocd/staging/staging-mq-infra-instance.yaml
 <span class=w>      </span><span class=nt>selfHeal</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class=w></span>
 <span class=w>    </span><span class=nt>syncOptions</span><span class=p>:</span><span class=w></span>
 <span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">Replace=true</span><span class=w></span>
-</code></pre></div> <p>See how the resources we explored in the previous section of this topic is referenced by <code>path: mq/environments/mq-infra/overlays/staging</code>:</p> <div class="no-copy highlight"><pre><span></span><code>mq/environments/mq-infra/overlays/staging/mq-infra/
+</code></pre></div> <p>See how the resources we explored in the previous section of this topic is referenced by <code>path: mq/environments/staging/mq-infra/</code>:</p> <div class="no-copy highlight"><pre><span></span><code>mq/environments/staging/mq-infra/mq-infra/
 ├── configmap.yaml
 ├── hooks
 │   ├── post-sync-job.sh
@@ -419,14 +417,14 @@ cat mq/config/argocd/staging/staging-mq-infra-instance.yaml
 <span class=w>    </span><span class=nt>server</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">https://kubernetes.default.svc</span><span class=w></span>
 <span class=w>  </span><span class=nt>project</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">applications</span><span class=w></span>
 <span class=w>  </span><span class=nt>source</span><span class=p>:</span><span class=w></span>
-<span class=w>    </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq/environments/mq-spring-app/overlays/staging</span><span class=w></span>
+<span class=w>    </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq/environments/staging/mq-spring-app/</span><span class=w></span>
 <span class=w>    </span><span class=nt>repoURL</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/prod-ref-guide/multi-tenancy-gitops-apps.git</span><span class=w></span>
 <span class=w>    </span><span class=nt>targetRevision</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">master</span><span class=w></span>
 <span class=w>  </span><span class=nt>syncPolicy</span><span class=p>:</span><span class=w></span>
 <span class=w>    </span><span class=nt>automated</span><span class=p>:</span><span class=w></span>
 <span class=w>      </span><span class=nt>prune</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class=w></span>
 <span class=w>      </span><span class=nt>selfHeal</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class=w></span>
-</code></pre></div> <p>See how the resources we explored in the previous section of this topic is referenced by <code>path: mq/environments/mq-spring-app/overlays/staging</code>:</p> <div class="no-copy highlight"><pre><span></span><code>mq/environments/mq-spring-app/overlays/staging/mq-spring-app/
+</code></pre></div> <p>See how the resources we explored in the previous section of this topic is referenced by <code>path: mq/environments/staging/mq-spring-app/</code>:</p> <div class="no-copy highlight"><pre><span></span><code>mq/environments/staging/mq-spring-app/mq-spring-app/
 ├── configmap-ccdt.yaml
 ├── configmap.yaml
 ├── deployment.yaml

@@ -392,10 +392,10 @@ Total 10 (delta 8), reused 0 (delta 0), pack-reused 0
 remote: Resolving deltas: 100% (8/8), completed with 5 local objects.
 To https://github.com/prod-ref-guide/multi-tenancy-gitops-apps.git
   239e49d..3a32a17  master -&gt; master      
-</code></pre></div> <p>This change to the GitOps repository can now be used by ArgoCD.</p> </li> </ol> <h3 id=enable-postsync-hooks-in-dev>Enable PostSync hooks in dev<a class=headerlink href=#enable-postsync-hooks-in-dev title="Permanent link">&para;</a></h3> <ol> <li> <p><em>Add PostSync hook to <code>mq-infra</code></em></p> <p>Issue the following commands to enable the postsync hook for <code>mq-infra</code>:</p> <div class=highlight><pre><span></span><code><span class=nb>cd</span> mq/environments/mq-infra/overlays/dev/mq-infra/hooks/
+</code></pre></div> <p>This change to the GitOps repository can now be used by ArgoCD.</p> </li> </ol> <h3 id=enable-postsync-hooks-in-dev>Enable PostSync hooks in dev<a class=headerlink href=#enable-postsync-hooks-in-dev title="Permanent link">&para;</a></h3> <ol> <li> <p><em>Add PostSync hook to <code>mq-infra</code></em></p> <p>Issue the following commands to enable the postsync hook for <code>mq-infra</code>:</p> <div class=highlight><pre><span></span><code><span class=nb>cd</span> mq/environments/dev/mq-infra/mq-infra/hooks/
 ./post-sync-job.sh
-<span class=nb>cd</span> ../../../../../../../
-</code></pre></div> <p>Issue the following command to verify:</p> <div class=highlight><pre><span></span><code>cat mq/environments/mq-infra/overlays/dev/mq-infra/hooks/post-sync-job.yaml
+<span class=nb>cd</span> ../../../../../../
+</code></pre></div> <p>Issue the following command to verify:</p> <div class=highlight><pre><span></span><code>cat mq/environments/dev/mq-infra/mq-infra/hooks/post-sync-job.yaml
 </code></pre></div> <p>to show the <code>post-sync-job.yaml</code> we created earlier:</p> <div class="no-copy highlight"><pre><span></span><code><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">batch/v1</span><span class=w></span>
 <span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">Job</span><span class=w></span>
 <span class=nt>metadata</span><span class=p>:</span><span class=w></span>
@@ -434,9 +434,9 @@ To https://github.com/prod-ref-guide/multi-tenancy-gitops-apps.git
 <span class=w>          </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">test-file=&quot;postman/mq-spring-app.postman_collection.json&quot;</span><span class=w></span>
 <span class=w>      </span><span class=nt>restartPolicy</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">Never</span><span class=w></span>
 <span class=w>  </span><span class=nt>backoffLimit</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class=w></span>
-</code></pre></div> </li> <li> <p><em>Activate the PostSync hook for <code>mq-infra</code></em></p> <p>Now that we've created the PostSync job, let's activate it.</p> <p>Open the <code>kustomization.yaml</code> that is under <code>mq/environments/mq-infra/overlays/dev/</code>. This contains all the resources that belong to the <code>dev</code> namespace.</p> <div class=highlight><pre><span></span><code>cat mq/environments/mq-infra/overlays/dev/kustomization.yaml
+</code></pre></div> </li> <li> <p><em>Activate the PostSync hook for <code>mq-infra</code></em></p> <p>Now that we've created the PostSync job, let's activate it.</p> <p>Open the <code>kustomization.yaml</code> that is under <code>mq/environments/dev/mq-infra/</code>. This contains all the resources of <code>mq-infra</code> that belong to the <code>dev</code> namespace.</p> <div class=highlight><pre><span></span><code>cat mq/environments/dev/mq-infra/kustomization.yaml
 </code></pre></div> <div class="no-copy highlight"><pre><span></span><code>resources:
- - ../../base
+ - ../../base/mq-infra
  - configmap/configmap.yaml
  # - configmap-security/configmap.yaml
  # - mq-infra/hooks/post-sync-job.yaml
@@ -447,7 +447,7 @@ patchesStrategicMerge:
  - mq-infra/qm-template.yaml
 </code></pre></div> <p>Open this file in your editor and uncomment the below resources.</p> <div class=highlight><pre><span></span><code>- mq-infra/hooks/post-sync-job.yaml
 </code></pre></div> <p>You will have the following resources now:</p> <div class="no-copy highlight"><pre><span></span><code>resources:
- - ../../base
+ - ../../base/mq-infra
  - configmap/configmap.yaml
  # - configmap-security/configmap.yaml
  - mq-infra/hooks/post-sync-job.yaml
@@ -456,10 +456,10 @@ patchesStrategicMerge:
  # - secrets/mq-client-jks-password-secret.yaml
 patchesStrategicMerge:
  - mq-infra/qm-template.yaml
-</code></pre></div> </li> <li> <p><em>Add PostSync hook to <code>mq-spring-app</code></em></p> <p>Issue the following commands to enable the postsync hook for <code>mq-spring-app</code>:</p> <div class=highlight><pre><span></span><code><span class=nb>cd</span> mq/environments/mq-spring-app/overlays/dev/mq-spring-app/hooks/
+</code></pre></div> </li> <li> <p><em>Add PostSync hook to <code>mq-spring-app</code></em></p> <p>Issue the following commands to enable the postsync hook for <code>mq-spring-app</code>:</p> <div class=highlight><pre><span></span><code><span class=nb>cd</span> mq/environments/dev/mq-spring-app/mq-spring-app/hooks/
 ./post-sync-job.sh
-<span class=nb>cd</span> ../../../../../../../
-</code></pre></div> <p>Issue the following command to verify:</p> <div class=highlight><pre><span></span><code>cat mq/environments/mq-spring-app/overlays/dev/mq-spring-app/hooks/post-sync-job.yaml
+<span class=nb>cd</span> ../../../../../../
+</code></pre></div> <p>Issue the following command to verify:</p> <div class=highlight><pre><span></span><code>cat mq/environments/dev/mq-spring-app/mq-spring-app/hooks/post-sync-job.yaml
 </code></pre></div> <p>to show the <code>post-sync-job.yaml</code> we created earlier:</p> <div class="no-copy highlight"><pre><span></span><code><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">batch/v1</span><span class=w></span>
 <span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">Job</span><span class=w></span>
 <span class=nt>metadata</span><span class=p>:</span><span class=w></span>
@@ -498,9 +498,9 @@ patchesStrategicMerge:
 <span class=w>          </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">test-file=&quot;postman/mq-spring-app.postman_collection.json&quot;</span><span class=w></span>
 <span class=w>      </span><span class=nt>restartPolicy</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">Never</span><span class=w></span>
 <span class=w>  </span><span class=nt>backoffLimit</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class=w></span>
-</code></pre></div> </li> <li> <p><em>Activate the PostSync hook for <code>mq-spring-app</code></em></p> <p>Now that we've created the PostSync job, let's activate it.</p> <p>Open the <code>kustomization.yaml</code> that is under <code>mq/environments/mq-spring-app/overlays/dev/</code>. This contains all the resources that belong to the <code>dev</code> namespace.</p> <div class=highlight><pre><span></span><code>cat mq/environments/mq-spring-app/overlays/dev/kustomization.yaml
+</code></pre></div> </li> <li> <p><em>Activate the PostSync hook for <code>mq-spring-app</code></em></p> <p>Now that we've created the PostSync job, let's activate it.</p> <p>Open the <code>kustomization.yaml</code> that is under <code>mq/environments/dev/mq-spring-app</code>. This contains all the resources of <code>mq-spring-app</code> that belong to the <code>dev</code> namespace.</p> <div class=highlight><pre><span></span><code>cat mq/environments/dev/mq-spring-app/kustomization.yaml
 </code></pre></div> <div class="no-copy highlight"><pre><span></span><code>resources:
- - ../../base
+ - ../../base/mq-spring-app
  - configmap/configmap.yaml
  - configmap/configmap-ccdt.yaml
  # - mq-spring-app/hooks/post-sync-job.yaml
@@ -511,7 +511,7 @@ patchesStrategicMerge:
  - mq-spring-app/deployment.yaml
 </code></pre></div> <p>Open this file in your editor and uncomment the below resources.</p> <div class=highlight><pre><span></span><code>- mq-spring-app/hooks/post-sync-job.yaml
 </code></pre></div> <p>You will have the following resources now:</p> <div class="no-copy highlight"><pre><span></span><code>resources:
- - ../../base
+ - ../../base/mq-spring-app
  - configmap/configmap.yaml
  - configmap/configmap-ccdt.yaml
  - mq-spring-app/hooks/post-sync-job.yaml
@@ -523,10 +523,10 @@ patchesStrategicMerge:
 </code></pre></div> </li> <li> <p><em>Push GitOps changes to GitHub</em></p> <p>Add all changes in the current folder to a git index, commit them, and push them to GitHub:</p> <div class=highlight><pre><span></span><code>git add .
 git commit -s -m <span class=s2>&quot;Defining PostSync hooks to mq-infra and mq-spring-app for promotion automation from dev to stage&quot;</span>
 git push origin <span class=nv>$GIT_BRANCH</span>
-</code></pre></div> </li> </ol> <h3 id=enable-postsync-hooks-in-stage>Enable PostSync hooks in stage<a class=headerlink href=#enable-postsync-hooks-in-stage title="Permanent link">&para;</a></h3> <ol> <li> <p><em>Add PostSync hook to <code>mq-infra</code></em></p> <p>Issue the following commands to enable the postsync hook for <code>mq-infra</code>:</p> <div class=highlight><pre><span></span><code><span class=nb>cd</span> mq/environments/mq-infra/overlays/staging/mq-infra/hooks/
+</code></pre></div> </li> </ol> <h3 id=enable-postsync-hooks-in-stage>Enable PostSync hooks in stage<a class=headerlink href=#enable-postsync-hooks-in-stage title="Permanent link">&para;</a></h3> <ol> <li> <p><em>Add PostSync hook to <code>mq-infra</code></em></p> <p>Issue the following commands to enable the postsync hook for <code>mq-infra</code>:</p> <div class=highlight><pre><span></span><code><span class=nb>cd</span> mq/environments/staging/mq-infra/mq-infra/hooks/
 ./post-sync-job.sh
-<span class=nb>cd</span> ../../../../../../../
-</code></pre></div> <p>Issue the following command to verify:</p> <div class=highlight><pre><span></span><code>cat mq/environments/mq-infra/overlays/staging/mq-infra/hooks/post-sync-job.yaml
+<span class=nb>cd</span> ../../../../../../
+</code></pre></div> <p>Issue the following command to verify:</p> <div class=highlight><pre><span></span><code>cat mq/environments/staging/mq-infra/mq-infra/hooks/post-sync-job.yaml
 </code></pre></div> <p>to show the <code>post-sync-job.yaml</code> we created earlier:</p> <div class="no-copy highlight"><pre><span></span><code><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">batch/v1</span><span class=w></span>
 <span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">Job</span><span class=w></span>
 <span class=nt>metadata</span><span class=p>:</span><span class=w></span>
@@ -567,9 +567,9 @@ git push origin <span class=nv>$GIT_BRANCH</span>
 <span class=w>          </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">test-plan=&quot;jmeter/mq-spring-app.jmx&quot;</span><span class=w></span>
 <span class=w>      </span><span class=nt>restartPolicy</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">Never</span><span class=w></span>
 <span class=w>  </span><span class=nt>backoffLimit</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class=w></span>
-</code></pre></div> </li> <li> <p><em>Activate the PostSync hook for <code>mq-infra</code></em></p> <p>Now that we've created the PostSync job, let's activate it.</p> <p>Open the <code>kustomization.yaml</code> that is under <code>mq/environments/mq-infra/overlays/staging/</code>. This contains all the resources that belong to the <code>stage</code> namespace.</p> <div class=highlight><pre><span></span><code>cat mq/environments/mq-infra/overlays/staging/kustomization.yaml
+</code></pre></div> </li> <li> <p><em>Activate the PostSync hook for <code>mq-infra</code></em></p> <p>Now that we've created the PostSync job, let's activate it.</p> <p>Open the <code>kustomization.yaml</code> that is under <code>mq/environments/staging/mq-infra</code>. This contains all the resources of <code>mq-infra</code> that belong to the <code>stage</code> namespace.</p> <div class=highlight><pre><span></span><code>cat mq/environments/staging/mq-infra/kustomization.yaml
 </code></pre></div> <div class="no-copy highlight"><pre><span></span><code>resources:
- - ../../base
+ - ../../base/mq-infra
  - configmap/configmap.yaml
  # - configmap-security/configmap.yaml
  # - mq-infra/hooks/post-sync-job.yaml
@@ -580,7 +580,7 @@ patchesStrategicMerge:
  - mq-infra/qm-template.yaml
 </code></pre></div> <p>Open this file in your editor and uncomment the below resources.</p> <div class=highlight><pre><span></span><code>- mq-infra/hooks/post-sync-job.yaml
 </code></pre></div> <p>You will have the following resources now:</p> <div class="no-copy highlight"><pre><span></span><code>resources:
- - ../../base
+ - ../../base/mq-infra
  - configmap/configmap.yaml
  # - configmap-security/configmap.yaml
  - mq-infra/hooks/post-sync-job.yaml
@@ -589,10 +589,10 @@ patchesStrategicMerge:
  #- secrets/mq-client-jks-password-secret.yaml
 patchesStrategicMerge:
  - mq-infra/qm-template.yaml
-</code></pre></div> </li> <li> <p><em>Add PostSync hook to <code>mq-spring-app</code></em></p> <p>Issue the following commands to enable the postsync hook for <code>mq-spring-app</code>:</p> <div class=highlight><pre><span></span><code><span class=nb>cd</span> mq/environments/mq-spring-app/overlays/staging/mq-spring-app/hooks/
+</code></pre></div> </li> <li> <p><em>Add PostSync hook to <code>mq-spring-app</code></em></p> <p>Issue the following commands to enable the postsync hook for <code>mq-spring-app</code>:</p> <div class=highlight><pre><span></span><code><span class=nb>cd</span> mq/environments/staging/mq-spring-app/mq-spring-app/hooks/
 ./post-sync-job.sh
-<span class=nb>cd</span> ../../../../../../../
-</code></pre></div> <p>Issue the following command to verify:</p> <div class=highlight><pre><span></span><code>cat mq/environments/mq-spring-app/overlays/staging/mq-spring-app/hooks/post-sync-job.yaml
+<span class=nb>cd</span> ../../../../../../
+</code></pre></div> <p>Issue the following command to verify:</p> <div class=highlight><pre><span></span><code>cat mq/environments/staging/mq-spring-app/mq-spring-app/hooks/post-sync-job.yaml
 </code></pre></div> <p>to show the <code>post-sync-job.yaml</code> we created earlier:</p> <div class="no-copy highlight"><pre><span></span><code><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">batch/v1</span><span class=w></span>
 <span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">Job</span><span class=w></span>
 <span class=nt>metadata</span><span class=p>:</span><span class=w></span>
@@ -616,7 +616,7 @@ patchesStrategicMerge:
 <span class=w>          </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">start</span><span class=w></span>
 <span class=w>          </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ibm-mq-promote-stage-prod</span><span class=w></span>
 <span class=w>          </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">--param</span><span class=w></span>
-<span class=w>          </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">git-url=https://github.com/mq-in-depth-kustomize/mq-spring-app.git</span><span class=w></span>
+<span class=w>          </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">git-url=https://github.com/prod-ref-guide/mq-spring-app.git</span><span class=w></span>
 <span class=w>          </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">--param</span><span class=w></span>
 <span class=w>          </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">git-revision=master</span><span class=w></span>
 <span class=w>          </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">--param</span><span class=w></span>
@@ -633,9 +633,9 @@ patchesStrategicMerge:
 <span class=w>          </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">test-plan=&quot;jmeter/mq-spring-app.jmx&quot;</span><span class=w></span>
 <span class=w>      </span><span class=nt>restartPolicy</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">Never</span><span class=w></span>
 <span class=w>  </span><span class=nt>backoffLimit</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class=w></span>
-</code></pre></div> </li> <li> <p><em>Activate the PostSync hook for <code>mq-spring-app</code></em></p> <p>Now that we've created the PostSync job, let's activate it.</p> <p>Open the <code>kustomization.yaml</code> that is under <code>mq/environments/mq-spring-app/overlays/staging/</code>. This contains all the resources that belong to the <code>stage</code> namespace.</p> <div class=highlight><pre><span></span><code>cat mq/environments/mq-spring-app/overlays/staging/kustomization.yaml
+</code></pre></div> </li> <li> <p><em>Activate the PostSync hook for <code>mq-spring-app</code></em></p> <p>Now that we've created the PostSync job, let's activate it.</p> <p>Open the <code>kustomization.yaml</code> that is under <code>mq/environments/staging/mq-spring-app</code>. This contains all the resources of <code>mq-spring-app</code> that belong to the <code>stage</code> namespace.</p> <div class=highlight><pre><span></span><code>cat mq/environments/staging/mq-spring-app/kustomization.yaml
 </code></pre></div> <div class="no-copy highlight"><pre><span></span><code>resources:
- - ../../base
+ - ../../base/mq-spring-app
  - configmap/configmap.yaml
  - configmap/configmap-ccdt.yaml
  # - mq-spring-app/hooks/post-sync-job.yaml
@@ -646,7 +646,7 @@ patchesStrategicMerge:
  - mq-spring-app/deployment.yaml
 </code></pre></div> <p>Open this file in your editor and uncomment the below resources.</p> <div class=highlight><pre><span></span><code>- mq-spring-app/hooks/post-sync-job.yaml
 </code></pre></div> <p>You will have the following resources now:</p> <div class="no-copy highlight"><pre><span></span><code>resources:
- - ../../base
+ - ../../base/mq-spring-app
  - configmap/configmap.yaml
  - configmap/configmap-ccdt.yaml
  - mq-spring-app/hooks/post-sync-job.yaml
