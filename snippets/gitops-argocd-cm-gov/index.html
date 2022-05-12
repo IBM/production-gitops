@@ -54,14 +54,14 @@
 <span class=w>  </span><span class=c1>## The name of the ConsoleNotification resource in the cluster</span><span class=w></span>
 <span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=s>&quot;banner-env&quot;</span><span class=w></span>
 <span class=w>  </span><span class=c1>## The background color that should be used for the banner</span><span class=w></span>
-<span class=w>  </span><span class=nt>backgroundColor</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">red</span><span class=w></span>
-<span class=hll><span class=w>  </span><span class=c1>## The color of the text that will appear in the banner</span><span class=w></span>
-</span><span class=w>  </span><span class=nt>color</span><span class=p>:</span><span class=w> </span><span class=s>&quot;&#39;#fff&#39;&quot;</span><span class=w></span>
+<span class=hll><span class=w>  </span><span class=nt>backgroundColor</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">red</span><span class=w></span>
+</span><span class=w>  </span><span class=c1>## The color of the text that will appear in the banner</span><span class=w></span>
+<span class=w>  </span><span class=nt>color</span><span class=p>:</span><span class=w> </span><span class=s>&quot;&#39;#fff&#39;&quot;</span><span class=w></span>
 <span class=w>  </span><span class=c1>## The location of the banner. Options: BannerTop, BannerBottom, BannerTopBottom</span><span class=w></span>
 <span class=w>  </span><span class=nt>location</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">BannerTop</span><span class=w></span>
 <span class=w>  </span><span class=c1>## The text that should be displayed in the banner. This value is required for the banner to be created</span><span class=w></span>
-<span class=w>  </span><span class=nt>text</span><span class=p>:</span><span class=w> </span><span class=s>&quot;Production</span><span class=nv> </span><span class=s>Reference</span><span class=nv> </span><span class=s>Guide&quot;</span><span class=w></span>
-</code></pre></div> <p>It's clear that our intention is to modify the banner's <code>backgroundColor:red</code> and <code>text: Production Reference Guide</code> to the newly specified values. If you look at the <code>diff</code>:</p> <div class=highlight><pre><span></span><code>git diff
+<span class=hll><span class=w>  </span><span class=nt>text</span><span class=p>:</span><span class=w> </span><span class=s>&quot;Production</span><span class=nv> </span><span class=s>Reference</span><span class=nv> </span><span class=s>Guide&quot;</span><span class=w></span>
+</span></code></pre></div> <p>It's clear that our intention is to modify the banner's <code>backgroundColor:red</code> and <code>text: Production Reference Guide</code> to the newly specified values. If you look at the <code>diff</code>:</p> <div class=highlight><pre><span></span><code>git diff
 </code></pre></div> <p>you should see the following:</p> <div class="no-copy highlight"><pre><span></span><code><span class=gh>diff --git a/0-bootstrap/single-cluster/1-infra/argocd/consolenotification.yaml b/0-bootstrap/single-cluster/1-infra/argocd/consolenotification.yaml</span><span class=w></span>
 <span class=gh>index 30adf1a..596e821 100644</span><span class=w></span>
 <span class=gd>--- a/0-bootstrap/single-cluster/1-infra/argocd/consolenotification.yaml</span><span class=w></span>
