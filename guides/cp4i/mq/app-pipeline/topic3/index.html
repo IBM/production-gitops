@@ -32,17 +32,17 @@ mq-spring-prod-ref-guide
 <span class=nt>spec</span><span class=p>:</span><span class=w></span>
 <span class=w>  </span><span class=nt>serviceAccountName</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">pipeline</span><span class=w></span>
 <span class=w>  </span><span class=nt>triggers</span><span class=p>:</span><span class=w></span>
-<span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-infra-dev</span><span class=w></span>
+<span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-qm01-dev</span><span class=w></span>
 <span class=w>    </span><span class=nt>interceptors</span><span class=p>:</span><span class=w></span>
 <span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>ref</span><span class=p>:</span><span class=w></span>
 <span class=w>          </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=s>&quot;cel&quot;</span><span class=w></span>
 <span class=w>        </span><span class=nt>params</span><span class=p>:</span><span class=w></span>
 <span class=w>        </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=s>&quot;filter&quot;</span><span class=w></span>
-<span class=w>          </span><span class=nt>value</span><span class=p>:</span><span class=w> </span><span class=s>&quot;header.match(&#39;X-GitHub-Event&#39;,</span><span class=nv> </span><span class=s>&#39;push&#39;)</span><span class=nv> </span><span class=s>&amp;&amp;</span><span class=nv> </span><span class=s>body.ref</span><span class=nv> </span><span class=s>==</span><span class=nv> </span><span class=s>&#39;refs/heads/${GIT_BRANCH_QM1}&#39;</span><span class=nv> </span><span class=s>&amp;&amp;</span><span class=nv> </span><span class=s>body.repository.full_name</span><span class=nv> </span><span class=s>==</span><span class=nv> </span><span class=s>&#39;${GIT_ORG}/mq-infra&#39;&quot;</span><span class=w></span>
+<span class=w>          </span><span class=nt>value</span><span class=p>:</span><span class=w> </span><span class=s>&quot;header.match(&#39;X-GitHub-Event&#39;,</span><span class=nv> </span><span class=s>&#39;push&#39;)</span><span class=nv> </span><span class=s>&amp;&amp;</span><span class=nv> </span><span class=s>body.ref</span><span class=nv> </span><span class=s>==</span><span class=nv> </span><span class=s>&#39;refs/heads/${GIT_BRANCH_QM1}&#39;</span><span class=nv> </span><span class=s>&amp;&amp;</span><span class=nv> </span><span class=s>body.repository.full_name</span><span class=nv> </span><span class=s>==</span><span class=nv> </span><span class=s>&#39;${GIT_ORG}/mq-qm01&#39;&quot;</span><span class=w></span>
 <span class=w>    </span><span class=nt>bindings</span><span class=p>:</span><span class=w></span>
 <span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>ref</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">cnkt-trigger-binding</span><span class=w></span>
 <span class=w>    </span><span class=nt>template</span><span class=p>:</span><span class=w></span>
-<span class=w>      </span><span class=nt>ref</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-infra-dev</span><span class=w></span>
+<span class=w>      </span><span class=nt>ref</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-qm-dev</span><span class=w></span>
 <span class=w>  </span><span class=c1># - name: mq-spring-app-dev</span><span class=w></span>
 <span class=w>  </span><span class=c1>#   interceptors:</span><span class=w></span>
 <span class=w>  </span><span class=c1>#     - ref:</span><span class=w></span>
@@ -74,17 +74,17 @@ mq-spring-prod-ref-guide
 <span class=nt>spec</span><span class=p>:</span><span class=w></span>
 <span class=w>  </span><span class=nt>serviceAccountName</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">pipeline</span><span class=w></span>
 <span class=w>  </span><span class=nt>triggers</span><span class=p>:</span><span class=w></span>
-<span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-infra-dev</span><span class=w></span>
+<span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-qm01-dev</span><span class=w></span>
 <span class=w>    </span><span class=nt>interceptors</span><span class=p>:</span><span class=w></span>
 <span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>ref</span><span class=p>:</span><span class=w></span>
 <span class=w>          </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=s>&quot;cel&quot;</span><span class=w></span>
 <span class=w>        </span><span class=nt>params</span><span class=p>:</span><span class=w></span>
 <span class=w>        </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=s>&quot;filter&quot;</span><span class=w></span>
-<span class=w>          </span><span class=nt>value</span><span class=p>:</span><span class=w> </span><span class=s>&quot;header.match(&#39;X-GitHub-Event&#39;,</span><span class=nv> </span><span class=s>&#39;push&#39;)</span><span class=nv> </span><span class=s>&amp;&amp;</span><span class=nv> </span><span class=s>body.ref</span><span class=nv> </span><span class=s>==</span><span class=nv> </span><span class=s>&#39;refs/heads/${GIT_BRANCH_QM1}&#39;</span><span class=nv> </span><span class=s>&amp;&amp;</span><span class=nv> </span><span class=s>body.repository.full_name</span><span class=nv> </span><span class=s>==</span><span class=nv> </span><span class=s>&#39;${GIT_ORG}/mq-infra&#39;&quot;</span><span class=w></span>
+<span class=w>          </span><span class=nt>value</span><span class=p>:</span><span class=w> </span><span class=s>&quot;header.match(&#39;X-GitHub-Event&#39;,</span><span class=nv> </span><span class=s>&#39;push&#39;)</span><span class=nv> </span><span class=s>&amp;&amp;</span><span class=nv> </span><span class=s>body.ref</span><span class=nv> </span><span class=s>==</span><span class=nv> </span><span class=s>&#39;refs/heads/${GIT_BRANCH_QM1}&#39;</span><span class=nv> </span><span class=s>&amp;&amp;</span><span class=nv> </span><span class=s>body.repository.full_name</span><span class=nv> </span><span class=s>==</span><span class=nv> </span><span class=s>&#39;${GIT_ORG}/mq-qm01&#39;&quot;</span><span class=w></span>
 <span class=w>    </span><span class=nt>bindings</span><span class=p>:</span><span class=w></span>
 <span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>ref</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">cnkt-trigger-binding</span><span class=w></span>
 <span class=w>    </span><span class=nt>template</span><span class=p>:</span><span class=w></span>
-<span class=w>      </span><span class=nt>ref</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-infra-dev</span><span class=w></span>
+<span class=w>      </span><span class=nt>ref</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-qm-dev</span><span class=w></span>
 <span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-spring-app-dev</span><span class=w></span>
 <span class=w>    </span><span class=nt>interceptors</span><span class=p>:</span><span class=w></span>
 <span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>ref</span><span class=p>:</span><span class=w></span>
@@ -110,10 +110,10 @@ mq-spring-prod-ref-guide
 <span class=w>      </span><span class=nt>ref</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">cnkt-trigger-binding</span><span class=w></span>
 <span class=w>    </span><span class=nt>interceptors</span><span class=p>:</span><span class=w></span>
 <span class=w>    </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>cel</span><span class=p>:</span><span class=w></span>
-<span class=w>        </span><span class=nt>filter</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">header.match(&#39;X-GitHub-Event&#39;, &#39;push&#39;) &amp;&amp; body.ref == &#39;refs/heads/${GIT_BRANCH_QM1}&#39; &amp;&amp; body.repository.full_name == &#39;${GIT_ORG}/mq-infra&#39;</span><span class=w></span>
-<span class=w>    </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-infra-dev</span><span class=w></span>
+<span class=w>        </span><span class=nt>filter</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">header.match(&#39;X-GitHub-Event&#39;, &#39;push&#39;) &amp;&amp; body.ref == &#39;refs/heads/${GIT_BRANCH_QM1}&#39; &amp;&amp; body.repository.full_name == &#39;${GIT_ORG}/mq-qm01&#39;</span><span class=w></span>
+<span class=w>    </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-qm01-dev</span><span class=w></span>
 <span class=w>    </span><span class=nt>template</span><span class=p>:</span><span class=w></span>
-<span class=w>      </span><span class=nt>ref</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-infra-dev</span><span class=w></span>
+<span class=w>      </span><span class=nt>ref</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-qm-dev</span><span class=w></span>
 <span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>bindings</span><span class=p>:</span><span class=w></span>
 <span class=w>    </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">TriggerBinding</span><span class=w></span>
 <span class=w>      </span><span class=nt>ref</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">cnkt-trigger-binding</span><span class=w></span>
@@ -136,24 +136,24 @@ sh ./cntk-event-listener.sh
 <span class=nt>spec</span><span class=p>:</span><span class=w></span>
 <span class=w>  </span><span class=nt>serviceAccountName</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">pipeline</span><span class=w></span>
 <span class=w>  </span><span class=nt>triggers</span><span class=p>:</span><span class=w></span>
-<span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-infra-dev</span><span class=w></span>
+<span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-qm01-dev</span><span class=w></span>
 <span class=w>    </span><span class=nt>interceptors</span><span class=p>:</span><span class=w></span>
 <span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>ref</span><span class=p>:</span><span class=w></span>
 <span class=w>          </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=s>&quot;cel&quot;</span><span class=w></span>
 <span class=w>        </span><span class=nt>params</span><span class=p>:</span><span class=w></span>
 <span class=w>        </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=s>&quot;filter&quot;</span><span class=w></span>
-<span class=w>          </span><span class=nt>value</span><span class=p>:</span><span class=w> </span><span class=s>&quot;header.match(&#39;X-GitHub-Event&#39;,</span><span class=nv> </span><span class=s>&#39;push&#39;)</span><span class=nv> </span><span class=s>&amp;&amp;</span><span class=nv> </span><span class=s>body.ref</span><span class=nv> </span><span class=s>==</span><span class=nv> </span><span class=s>&#39;refs/heads/qm1-prod-ref-guide-test&#39;</span><span class=nv> </span><span class=s>&amp;&amp;</span><span class=nv> </span><span class=s>body.repository.full_name</span><span class=nv> </span><span class=s>==</span><span class=nv> </span><span class=s>&#39;prod-ref-guide-test/mq-infra&#39;&quot;</span><span class=w></span>
+<span class=w>          </span><span class=nt>value</span><span class=p>:</span><span class=w> </span><span class=s>&quot;header.match(&#39;X-GitHub-Event&#39;,</span><span class=nv> </span><span class=s>&#39;push&#39;)</span><span class=nv> </span><span class=s>&amp;&amp;</span><span class=nv> </span><span class=s>body.ref</span><span class=nv> </span><span class=s>==</span><span class=nv> </span><span class=s>&#39;refs/heads/qm1-prod-ref-guide&#39;</span><span class=nv> </span><span class=s>&amp;&amp;</span><span class=nv> </span><span class=s>body.repository.full_name</span><span class=nv> </span><span class=s>==</span><span class=nv> </span><span class=s>&#39;prod-ref-guide/mq-qm01&#39;&quot;</span><span class=w></span>
 <span class=w>    </span><span class=nt>bindings</span><span class=p>:</span><span class=w></span>
 <span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>ref</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">cnkt-trigger-binding</span><span class=w></span>
 <span class=w>    </span><span class=nt>template</span><span class=p>:</span><span class=w></span>
-<span class=w>      </span><span class=nt>ref</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-infra-dev</span><span class=w></span>
+<span class=w>      </span><span class=nt>ref</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-qm-dev</span><span class=w></span>
 <span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-spring-app-dev</span><span class=w></span>
 <span class=w>    </span><span class=nt>interceptors</span><span class=p>:</span><span class=w></span>
 <span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>ref</span><span class=p>:</span><span class=w></span>
 <span class=w>          </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=s>&quot;cel&quot;</span><span class=w></span>
 <span class=w>        </span><span class=nt>params</span><span class=p>:</span><span class=w></span>
 <span class=w>        </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=s>&quot;filter&quot;</span><span class=w></span>
-<span class=w>          </span><span class=nt>value</span><span class=p>:</span><span class=w> </span><span class=s>&quot;header.match(&#39;X-GitHub-Event&#39;,</span><span class=nv> </span><span class=s>&#39;push&#39;)</span><span class=nv> </span><span class=s>&amp;&amp;</span><span class=nv> </span><span class=s>body.ref</span><span class=nv> </span><span class=s>==</span><span class=nv> </span><span class=s>&#39;refs/heads/mq-spring-prod-ref-guide-test&#39;</span><span class=nv> </span><span class=s>&amp;&amp;</span><span class=nv> </span><span class=s>body.repository.full_name</span><span class=nv> </span><span class=s>==</span><span class=nv> </span><span class=s>&#39;prod-ref-guide-test/mq-spring-app&#39;&quot;</span><span class=w></span>
+<span class=w>          </span><span class=nt>value</span><span class=p>:</span><span class=w> </span><span class=s>&quot;header.match(&#39;X-GitHub-Event&#39;,</span><span class=nv> </span><span class=s>&#39;push&#39;)</span><span class=nv> </span><span class=s>&amp;&amp;</span><span class=nv> </span><span class=s>body.ref</span><span class=nv> </span><span class=s>==</span><span class=nv> </span><span class=s>&#39;refs/heads/mq-spring-prod-ref-guide&#39;</span><span class=nv> </span><span class=s>&amp;&amp;</span><span class=nv> </span><span class=s>body.repository.full_name</span><span class=nv> </span><span class=s>==</span><span class=nv> </span><span class=s>&#39;prod-ref-guide/mq-spring-app&#39;&quot;</span><span class=w></span>
 <span class=w>    </span><span class=nt>bindings</span><span class=p>:</span><span class=w></span>
 <span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>ref</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">cnkt-trigger-binding</span><span class=w></span>
 <span class=w>    </span><span class=nt>template</span><span class=p>:</span><span class=w></span>
@@ -172,20 +172,20 @@ sh ./cntk-event-listener.sh
 <span class=w>      </span><span class=nt>ref</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">cnkt-trigger-binding</span><span class=w></span>
 <span class=w>    </span><span class=nt>interceptors</span><span class=p>:</span><span class=w></span>
 <span class=w>    </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>cel</span><span class=p>:</span><span class=w></span>
-<span class=w>        </span><span class=nt>filter</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">header.match(&#39;X-GitHub-Event&#39;, &#39;push&#39;) &amp;&amp; body.ref == &#39;refs/heads/qm1-prod-ref-guide-test&#39; &amp;&amp; body.repository.full_name == &#39;prod-ref-guide-test/mq-infra&#39;</span><span class=w></span>
-<span class=w>    </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-infra-dev</span><span class=w></span>
+<span class=w>        </span><span class=nt>filter</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">header.match(&#39;X-GitHub-Event&#39;, &#39;push&#39;) &amp;&amp; body.ref == &#39;refs/heads/qm1-prod-ref-guide&#39; &amp;&amp; body.repository.full_name == &#39;prod-ref-guide/mq-qm01&#39;</span><span class=w></span>
+<span class=w>    </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-qm01-dev</span><span class=w></span>
 <span class=w>    </span><span class=nt>template</span><span class=p>:</span><span class=w></span>
-<span class=w>      </span><span class=nt>ref</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-infra-dev</span><span class=w></span>
+<span class=w>      </span><span class=nt>ref</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-qm-dev</span><span class=w></span>
 <span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>bindings</span><span class=p>:</span><span class=w></span>
 <span class=w>    </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">TriggerBinding</span><span class=w></span>
 <span class=w>      </span><span class=nt>ref</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">cnkt-trigger-binding</span><span class=w></span>
 <span class=w>    </span><span class=nt>interceptors</span><span class=p>:</span><span class=w></span>
 <span class=w>    </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>cel</span><span class=p>:</span><span class=w></span>
-<span class=w>        </span><span class=nt>filter</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">header.match(&#39;X-GitHub-Event&#39;, &#39;push&#39;) &amp;&amp; body.ref == &#39;refs/heads/qm1-prod-ref-guide-test&#39; &amp;&amp; body.repository.full_name == &#39;prod-ref-guide-test/mq-spring-app&#39;</span><span class=w></span>
+<span class=w>        </span><span class=nt>filter</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">header.match(&#39;X-GitHub-Event&#39;, &#39;push&#39;) &amp;&amp; body.ref == &#39;refs/heads/qm1-prod-ref-guide&#39; &amp;&amp; body.repository.full_name == &#39;prod-ref-guide/mq-spring-app&#39;</span><span class=w></span>
 <span class=w>    </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-spring-app-dev</span><span class=w></span>
 <span class=w>    </span><span class=nt>template</span><span class=p>:</span><span class=w></span>
 <span class=w>      </span><span class=nt>ref</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mq-spring-app-dev</span><span class=w></span>
-</code></pre></div> <p>An event listener can produce one or more triggers as specified by the list <code>spec.triggers:</code>. Now, our event listener additionally produces a trigger called <code>mq-spring-app-dev</code> along with <code>mq-infra-dev</code>. This trigger comprises the template <code>mq-spring-app-dev</code> and template binding <code>cntk-trigger-binding</code>.</p> </li> <li> <p><em>Push GitOps changes to GitHub</em></p> <p>Let’s make these GitOps changes and push them.</p> <p>Add all changes in the current folder to a git index, commit them, and push them to GitHub:</p> <div class=highlight><pre><span></span><code>git add .
+</code></pre></div> <p>An event listener can produce one or more triggers as specified by the list <code>spec.triggers:</code>. Now, our event listener additionally produces a trigger called <code>mq-spring-app-dev</code> along with <code>mq-qm01-dev</code>. The trigger <code>mq-spring-app-dev</code> comprises the template <code>mq-spring-app-dev</code> and template binding <code>cntk-trigger-binding</code>.</p> </li> <li> <p><em>Push GitOps changes to GitHub</em></p> <p>Let’s make these GitOps changes and push them.</p> <p>Add all changes in the current folder to a git index, commit them, and push them to GitHub:</p> <div class=highlight><pre><span></span><code>git add .
 git commit -s -m <span class=s2>&quot;Customizing the event trigger&quot;</span>
 git push origin <span class=nv>$GIT_BRANCH</span>
 </code></pre></div> <p>The changes have now been pushed to your GitOps repository:</p> <div class="no-copy highlight"><pre><span></span><code>Enumerating objects: 15, done.
@@ -204,8 +204,9 @@ To https://github.com/hp-gitops-mq/multi-tenancy-gitops-apps.git
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">configmaps/gitops-repo-configmap.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">eventlisteners/cntk-event-listener.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">triggerbindings/cntk-binding.yaml</span><span class=w></span>
-<span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">triggertemplates/mq-infra-dev.yaml</span><span class=w></span>
+<span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">triggertemplates/mq-qm-dev.yaml</span><span class=w></span>
 <span class=c1>#- triggertemplates/mq-spring-app-dev.yaml</span><span class=w></span>
+<span class=c1>#- pipelines/mq-metric-samples-dev-pipeline.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">pipelines/ibm-test-pipeline-for-dev.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">pipelines/ibm-test-pipeline-for-stage.yaml</span><span class=w></span>
 <span class=c1>#- pipelines/java-maven-dev-pipeline.yaml</span><span class=w></span>
@@ -218,13 +219,17 @@ To https://github.com/hp-gitops-mq/multi-tenancy-gitops-apps.git
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">roles/custom-staging-pipeline-sa-rolebinding.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">roles/custom-prod-pipeline-sa-rolebinding.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">routes/cntk-route.yaml</span><span class=w></span>
-<span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">secrets/artifactory-access-secret.yaml</span><span class=w></span>
+<span class=c1>#- secrets/artifactory-access-secret.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">secrets/git-credentials-secret.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">secrets/ibm-entitled-registry-credentials-secret.yaml</span><span class=w></span>
 <span class=c1>#- secrets/mq-client-jks-password-secret.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">tasks/10-gitops.yaml</span><span class=w></span>
+<span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">tasks/10-gitops-for-mq.yaml</span><span class=w></span>
+<span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">tasks/10-gitops-promotion.yaml</span><span class=w></span>
+<span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">tasks/11-app-name.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">tasks/12-functional-tests.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">tasks/13-jmeter-performance-test.yaml</span><span class=w></span>
+<span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">tasks/13-cphtestp-performance-test.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">tasks/4-smoke-tests-mq.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">tasks/4-smoke-tests.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">tasks/ibm-build-tag-push-v2-6-13.yaml</span><span class=w></span>
@@ -234,6 +239,25 @@ To https://github.com/hp-gitops-mq/multi-tenancy-gitops-apps.git
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">tasks/ibm-java-maven-test-v2-6-13.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">tasks/ibm-setup-v2-6-13.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">tasks/ibm-tag-release-v2-6-13.yaml</span><span class=w></span>
+<span class=c1>#- tasks/mq-metrics-build-tag-push.yaml</span><span class=w></span>
+
+<span class=c1># Automated promotion process triggers</span><span class=w></span>
+
+<span class=c1># - triggertemplates/mq-qm-dev-triggertemplate.yaml</span><span class=w></span>
+<span class=c1># - eventlisteners/mq-qm-dev-eventlistener.yaml</span><span class=w></span>
+<span class=c1># - routes/mq-qm-dev-route.yaml</span><span class=w></span>
+<span class=c1>#</span><span class=w></span>
+<span class=c1># - triggertemplates/mq-spring-app-dev-triggertemplate.yaml</span><span class=w></span>
+<span class=c1># - eventlisteners/mq-spring-app-dev-eventlistener.yaml</span><span class=w></span>
+<span class=c1># - routes/mq-spring-app-dev-route.yaml</span><span class=w></span>
+<span class=c1>#</span><span class=w></span>
+<span class=c1># - triggertemplates/mq-qm-stage-triggertemplate.yaml</span><span class=w></span>
+<span class=c1># - eventlisteners/mq-qm-stage-eventlistener.yaml</span><span class=w></span>
+<span class=c1># - routes/mq-qm-stage-route.yaml</span><span class=w></span>
+<span class=c1>#</span><span class=w></span>
+<span class=c1># - triggertemplates/mq-spring-app-stage-triggertemplate.yaml</span><span class=w></span>
+<span class=c1># - eventlisteners/mq-spring-app-stage-eventlistener.yaml</span><span class=w></span>
+<span class=c1># - routes/mq-spring-app-stage-route.yaml</span><span class=w></span>
 </code></pre></div> <p>Open this file in your editor and uncomment the below resources.</p> <div class="no-copy highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">triggertemplates/mq-spring-app-dev.yaml</span><span class=w></span>
 </code></pre></div> <p>You will have the following resources un-commented:</p> <div class="no-copy highlight"><pre><span></span><code><span class=nt>resources</span><span class=p>:</span><span class=w></span>
 <span class=c1>#- certificates/ci-mq-client-certificate.yaml</span><span class=w></span>
@@ -241,8 +265,9 @@ To https://github.com/hp-gitops-mq/multi-tenancy-gitops-apps.git
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">configmaps/gitops-repo-configmap.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">eventlisteners/cntk-event-listener.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">triggerbindings/cntk-binding.yaml</span><span class=w></span>
-<span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">triggertemplates/mq-infra-dev.yaml</span><span class=w></span>
+<span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">triggertemplates/mq-qm-dev.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">triggertemplates/mq-spring-app-dev.yaml</span><span class=w></span>
+<span class=c1>#- pipelines/mq-metric-samples-dev-pipeline.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">pipelines/ibm-test-pipeline-for-dev.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">pipelines/ibm-test-pipeline-for-stage.yaml</span><span class=w></span>
 <span class=c1>#- pipelines/java-maven-dev-pipeline.yaml</span><span class=w></span>
@@ -255,13 +280,17 @@ To https://github.com/hp-gitops-mq/multi-tenancy-gitops-apps.git
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">roles/custom-staging-pipeline-sa-rolebinding.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">roles/custom-prod-pipeline-sa-rolebinding.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">routes/cntk-route.yaml</span><span class=w></span>
-<span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">secrets/artifactory-access-secret.yaml</span><span class=w></span>
+<span class=c1>#- secrets/artifactory-access-secret.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">secrets/git-credentials-secret.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">secrets/ibm-entitled-registry-credentials-secret.yaml</span><span class=w></span>
 <span class=c1>#- secrets/mq-client-jks-password-secret.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">tasks/10-gitops.yaml</span><span class=w></span>
+<span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">tasks/10-gitops-for-mq.yaml</span><span class=w></span>
+<span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">tasks/10-gitops-promotion.yaml</span><span class=w></span>
+<span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">tasks/11-app-name.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">tasks/12-functional-tests.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">tasks/13-jmeter-performance-test.yaml</span><span class=w></span>
+<span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">tasks/13-cphtestp-performance-test.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">tasks/4-smoke-tests-mq.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">tasks/4-smoke-tests.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">tasks/ibm-build-tag-push-v2-6-13.yaml</span><span class=w></span>
@@ -271,6 +300,25 @@ To https://github.com/hp-gitops-mq/multi-tenancy-gitops-apps.git
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">tasks/ibm-java-maven-test-v2-6-13.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">tasks/ibm-setup-v2-6-13.yaml</span><span class=w></span>
 <span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">tasks/ibm-tag-release-v2-6-13.yaml</span><span class=w></span>
+<span class=c1>#- tasks/mq-metrics-build-tag-push.yaml</span><span class=w></span>
+
+<span class=c1># Automated promotion process triggers</span><span class=w></span>
+
+<span class=c1># - triggertemplates/mq-qm-dev-triggertemplate.yaml</span><span class=w></span>
+<span class=c1># - eventlisteners/mq-qm-dev-eventlistener.yaml</span><span class=w></span>
+<span class=c1># - routes/mq-qm-dev-route.yaml</span><span class=w></span>
+<span class=c1>#</span><span class=w></span>
+<span class=c1># - triggertemplates/mq-spring-app-dev-triggertemplate.yaml</span><span class=w></span>
+<span class=c1># - eventlisteners/mq-spring-app-dev-eventlistener.yaml</span><span class=w></span>
+<span class=c1># - routes/mq-spring-app-dev-route.yaml</span><span class=w></span>
+<span class=c1>#</span><span class=w></span>
+<span class=c1># - triggertemplates/mq-qm-stage-triggertemplate.yaml</span><span class=w></span>
+<span class=c1># - eventlisteners/mq-qm-stage-eventlistener.yaml</span><span class=w></span>
+<span class=c1># - routes/mq-qm-stage-route.yaml</span><span class=w></span>
+<span class=c1>#</span><span class=w></span>
+<span class=c1># - triggertemplates/mq-spring-app-stage-triggertemplate.yaml</span><span class=w></span>
+<span class=c1># - eventlisteners/mq-spring-app-stage-eventlistener.yaml</span><span class=w></span>
+<span class=c1># - routes/mq-spring-app-stage-route.yaml</span><span class=w></span>
 </code></pre></div> </li> <li> <p><em>Update the GitOps repository</em></p> <p>Let’s commit these changes to make the event listener and trigger resources active in the cluster.</p> <p>Issue the following command:</p> <div class=highlight><pre><span></span><code>git add mq/environments/ci/kustomization.yaml
 git commit -s -m <span class=s2>&quot;Add app pipeline webhook&quot;</span>
 git push origin <span class=nv>$GIT_BRANCH</span>
@@ -281,7 +329,7 @@ Compressing objects: 100% (6/6), done.
 Writing objects: 100% (6/6), 508 bytes | 508.00 KiB/s, done.
 Total 6 (delta 5), reused 0 (delta 0)
 remote: Resolving deltas: 100% (5/5), completed with 5 local objects.
-To https://github.com/hp-gitops-mq/multi-tenancy-gitops-apps.git
+To https://github.com/prod-ref-guide/multi-tenancy-gitops-apps.git
    5d937d7..7ed3cd1  master -&gt; master
 </code></pre></div> <p>This change to the GitOps repository can now be used by ArgoCD.</p> </li> <li> <p><em>The <code>apps-mq-rest-ci-1</code> argocd application</em></p> <p>Let's examine the ArgoCD application that manage the <strong>applications in ci namespace</strong>.</p> <p>In the ArgoCD UI <strong>Applications</strong> view, click on the icon for the <code>apps-mq-rest-ci-1</code> application:</p> <p><img alt=diagram21 src=../images/diagram21.png style=max-height:600px></p> <p>You will see all the necessary configurations. Now, you will see trigger template, trigger binding and event listener we just created under this application.</p> </li> <li> <p><em>The GitHub webhook UI</em></p> <p>Let's now use the GitHub UI, to configure a webhook that creates an event and sends it to the route whenever the queue manager source repository changes.</p> <p>We'll configure the webhook using the GitHub UI.</p> <p>Issue the following command to determine the URL for the UI:</p> <div class=highlight><pre><span></span><code><span class=nb>echo</span> https://github.com/<span class=si>${</span><span class=nv>GIT_ORG</span><span class=si>}</span>/mq-spring-app/settings/hooks/new
 </code></pre></div> <p>for example:</p> <div class="no-copy highlight"><pre><span></span><code>https://github.com/prod-ref-guide/mq-spring-app/settings/hooks/new
